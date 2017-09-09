@@ -1,13 +1,41 @@
+<div id="header">
+    <h1>Welcome Dear User</h1>
+    <hr />
+</div>
 <html>
   <head>
-    <title>{{ title }} - Welcome</title>
+    <title>{{ title }} - Welcome </title>
+    <style>
+    html {
+        font-family: "Arial";
+        background: white;
+    }
+    body {
+        background: lightgrey;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    #header {
+        padding-top: 5;
+        background: lightsteelblue;
+    }
+    #inner-header {
+        padding-left: 10;
+    }
+    #main{
+        padding-left: 10;
+    }
+    </style>
   </head>
   <body>
-      <h1>Hello {{ user.nickname }}!</h1>
+      <h1>This page is accepting a single word and deriving all possible anagrams</h1>
       <h1>Please enter your word here</h1>
       <form action="/" method="POST" name="permutation">
         <input type="text" value="" name='perm'>
         <p><input type="submit" value="Submit"></p>
+
       </form>
   </body>
 </html
+
+
