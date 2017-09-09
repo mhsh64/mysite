@@ -15,7 +15,9 @@ def output():
         return(len(perms))
     else:
         user = {'nickname': 'Dear User'}
-        return render_template('index.html', title='Home', user=user)
+        return render_template('index.html',
+                                title='Home',
+                                user=user)
 
 
 
