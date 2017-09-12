@@ -1,5 +1,5 @@
 <div id="header">
-    <h1><font size="4">Welcome {{ user_html['nickname'] }}</font></h1>
+    <h1><font size="4">Thank you</font></h1>
     <hr />
 </div>
 <html>
@@ -28,13 +28,9 @@
     </style>
   </head>
   <body>
-      <h1><font size="3">This page is accepting a single word and deriving all possible anagrams</font></h1>
-      <h1><font size="3">Please enter your word here</font></h1>
-      <form action="/" method="POST" name="permutation">
-        <input type="text" value="" name='perm'>
-        <p><input type="submit" value="Submit"></p>
-
-      </form>
+      <h1><font size="3">This is anagrams for your word: {{input_word}}. We have total {{ana_dups}} anagrams, after removing duplicates.  </font></h1>
+      <form action="/" method="POST" name="output_form"></form>
+      <h1><font size="2">{{ output_html['output_cell'] }}</font></h1>
   </body>
 </html
 
