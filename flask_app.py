@@ -13,14 +13,27 @@ app = Flask(__name__)
 from itertools import permutations
 from flask import render_template, request
 
-# want our default page to be accessible by either GET or POST
+# added my own function, this function will remove duplicate words, if we have duplicate characters in input
+def my_perm(y):
+    if len(y) == 1:
+        return [y]
+    p = []
+    temp = my_perm(y[1:])
+    for i in temp:
+        for x in range(len(i) + 1):
+            p.append(i[:x] + y[0] + i[x:])
+    return list(set(p))
+
+
+# want my default page to be accessible by either GET or POST
 @app.route('/', methods=['GET', 'POST'])
 def output():
     result="hi"
     # Change request.args.get to request.form.get
     if request.form.get('perm', None):
         result = request.form['perm']
-        perms = [''.join(p) for p in permutations(result)]
+        # perms = [''.join(p) for p in permutations(result)]
+        perms = [''.join(p) for p in my_perm(result)]
         return str(perms)
     else:
         user = {'nickname': 'Dear User'}
