@@ -22,17 +22,20 @@ def my_perm(y):
 def output():
     input="hi"
     # Change request.args.get to request.form.get
-    if request.form.get('perm', None):
+    if  request.form.get('perm', None):
         input = request.form['perm']
-        result = my_perm(input)
-        perms = [''.join(p) for p in result]
-        dedups = len(perms)
-        output = {'output_cell': str(perms)}
-        return render_template('output.html',
-                                title='Output',
-                                input_word=input,
-                                ana_dups=dedups,
-                                output_html=output)
+        if  input.isalpha():
+            result = my_perm(input)
+            perms = [''.join(p) for p in result]
+            dedups = len(perms)
+            output = {'output_cell': str(perms)}
+            return render_template('output.html',
+                                    title='Output',
+                                    input_word=input,
+                                    ana_dups=dedups,
+                                    output_html=output)
+        else:
+            return render_template('alpha.html')
     else:
         user = {'nickname': 'Dear User'}
         return render_template('index.html',
@@ -40,7 +43,10 @@ def output():
                                 user_html=user)
 
 
-
+# error page
+@app.errorhandler(404)
+def not_found(e):
+    return render_template('404.html')
 
 
 
