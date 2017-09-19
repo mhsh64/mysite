@@ -4,18 +4,7 @@ app = Flask(__name__)
 
 # render_template: takes a Jinja template as input and produces pure HTML
 from flask import render_template, request
-
-# added my own function, this function will remove duplicate words, if we have duplicate characters in input
-def my_perm(y):
-    if len(y) == 1:
-        return [y]
-    p = []
-    temp = my_perm(y[1:])
-    for i in temp:
-        for x in range(len(i) + 1):
-            p.append(i[:x] + y[0] + i[x:])
-    return list(set(p))
-
+from myfunction import my_perm
 
 # want my default page to be accessible by either GET or POST
 @app.route('/', methods=['GET', 'POST'])
@@ -24,6 +13,7 @@ def output():
     # Change request.args.get to request.form.get
     if  request.form.get('perm', None):
         input = request.form['perm']
+        # check if user enters the alphabets only
         if  input.isalpha():
             result = my_perm(input)
             perms = [''.join(p) for p in result]
@@ -34,6 +24,7 @@ def output():
                                     input_word=input,
                                     ana_dups=dedups,
                                     output_html=output)
+        # if user enters numbers or symbols, it runs alpha.html page
         else:
             return render_template('alpha.html')
     else:
